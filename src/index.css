@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    font-family: "Inter", system-ui, sans-serif;
+    @apply antialiased; /* Makes text look sharper on retina screens */
+  }
+  
+  body {
+    @apply bg-slate-950 text-slate-200;
+  }
+}
+
+/* --- ANIMATIONS --- */
+/* A subtle pulse for 'AI' processing states */
+@keyframes ai-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
+  50% { opacity: 0.8; box-shadow: 0 0 25px rgba(56, 189, 248, 0.5); }
+}
+
+/* --- LAYOUT & BACKGROUNDS --- */
+
+/* Deep, rich dark mode background with a subtle spotlight effect */
+.bg-main-gradient {
+  @apply bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black min-h-screen;
+}
+
+/* Glassmorphism Card: The core building block */
+.section-card {
+  @apply relative bg-slate-900/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 md:p-8 transition-all duration-300;
+}
+
+.section-card:hover {
+  @apply border-sky-500/30 shadow-[0_0_30px_-10px_rgba(14,165,233,0.15)] transform -translate-y-1;
+}
+
+/* --- UPLOAD AREA (The Hero Component) --- */
+.upload-area {
+  @apply relative bg-slate-800/30 backdrop-blur-md rounded-2xl p-1 border border-dashed border-slate-600/50 max-w-2xl mx-auto transition-all duration-500;
+}
+
+.upload-area:hover {
+  @apply border-sky-500/50 bg-slate-800/50 shadow-[0_0_40px_-10px_rgba(56,189,248,0.2)];
+}
+
+.upload-zone {
+  @apply flex flex-col items-center justify-center p-8 md:p-12 text-center rounded-xl transition-all duration-300;
+}
+
+/* --- BUTTONS --- */
+
+/* Primary: Glowing gradient with hover lift */
+.btn-primary {
+  @apply relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold tracking-wide rounded-xl shadow-lg shadow-cyan-500/20 transition-all duration-300 overflow-hidden;
+}
+
+.btn-primary:hover {
+  @apply shadow-cyan-500/40 scale-[1.02] brightness-110;
+}
+
+.btn-primary:active {
+  @apply scale-[0.98];
+}
+
+/* Secondary: Subtle outline for less critical actions */
+.btn-secondary {
+  @apply px-6 py-2.5 bg-transparent text-slate-400 border border-slate-600 hover:border-slate-400 hover:text-white rounded-lg transition-colors duration-300 text-sm font-medium tracking-wide;
+}
+
+/* --- ANALYTICS & SCORES --- */
+
+/* Score Card: High-visibility data container */
+.score-card {
+  @apply relative overflow-hidden bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-3xl p-6 md:p-8 border border-slate-700/50 shadow-xl backdrop-blur-sm;
+}
+
+/* The circular score indicator or icons */
+.icon-container-xl {
+  @apply w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center border border-slate-700/50 bg-slate-800/50 shadow-inner text-2xl md:text-3xl;
+}
+
+/* Progress Bars: Sleek and modern */
+.progress-bar {
+  @apply w-full h-3 bg-slate-800 rounded-full overflow-hidden;
+}
+
+.progress-fill {
+  @apply h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(255,255,255,0.3)];
+}
+
+/* --- KEYWORDS & TAGS --- */
+
+/* Tech-inspired tags with a glow */
+.keyword-tag {
+  @apply inline-flex items-center px-3 py-1.5 text-xs md:text-sm font-medium text-cyan-300 bg-cyan-950/30 border border-cyan-500/20 rounded-lg transition-all duration-300 cursor-default;
+}
+
+.keyword-tag:hover {
+  @apply border-cyan-400/50 shadow-[0_0_15px_-5px_rgba(34,211,238,0.4)] text-cyan-200;
+}
+
+/* --- FEATURE GRID ITEMS --- */
+
+/* --- FEATURE GRID ITEMS --- */
+
+/* 1. Define shared base styles for ALL cards here using comma separation */
+.feature-card,
+.feature-card-green,
+.feature-card-orange {
+  @apply flex flex-col items-center text-center p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1;
+}
+
+/* 2. Add specific colors for the Green Card */
+.feature-card-green {
+  @apply bg-emerald-950/10 border-emerald-500/10 hover:border-emerald-500/30 hover:shadow-[0_0_20px_-5px_rgba(16,185,129,0.1)];
+}
+
+/* 3. Add specific colors for the Orange Card */
+.feature-card-orange {
+  @apply bg-amber-950/10 border-amber-500/10 hover:border-amber-500/30 hover:shadow-[0_0_20px_-5px_rgba(245,158,11,0.1)];
+}
