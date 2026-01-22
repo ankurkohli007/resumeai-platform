@@ -2,25 +2,161 @@
 
 @layer base {
   body {
-    @apply bg-[#020617] text-slate-200;
+    @apply bg-black text-white font-sans antialiased;
+  }
+
+  * {
+    @apply transition-colors duration-300;
   }
 }
 
-.bg-main-gradient {
-  background: 
-    radial-gradient(circle at 50% -20%, #1e293b 0%, transparent 50%),
-    radial-gradient(circle at 50% 100%, #0891b210 0%, transparent 50%),
-    #020617;
-  @apply min-h-screen w-full;
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-/* Add a subtle shine animation to the border */
-@keyframes border-glow {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
+/* Custom animations in keyframes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-.group:hover {
-  animation: border-glow 2s infinite ease-in-out;
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(34, 211, 238, 0.5);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Layer for custom utilities */
+@layer utilities {
+  /* Animation utilities */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  .animate-slide-in-up {
+    animation: slideInUp 0.6s ease-out;
+  }
+
+  .animate-slide-in-down {
+    animation: slideInDown 0.6s ease-out;
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-hover {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent;
+  }
+
+  /* Smooth shadows */
+  .shadow-lg-smooth {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .shadow-xl-smooth {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply hover:shadow-xl-smooth hover:-translate-y-2 transition-all duration-300;
+  }
+
+  .hover-glow {
+    @apply hover:shadow-glow transition-all duration-300;
+  }
+}
+
+/* Selection color */
+::selection {
+  @apply bg-cyan-500/30 text-cyan-300;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-600;
+}
+
+/* Focus states */
+button:focus-visible,
+input:focus-visible {
+  @apply outline-none ring-2 ring-cyan-500/50;
+}
+
+/* Backdrop blur for better readability */
+@supports (backdrop-filter: blur(1px)) {
+  .backdrop-blur-xl {
+    backdrop-filter: blur(20px);
+  }
 }
