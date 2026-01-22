@@ -1,84 +1,107 @@
 const constants = {
-    ANALYZE_RESUME_PROMPT: `First, determine if this document is actually a resume. Look for:
-  - Professional experience, work history, or employment information
-  - Education background, degrees, or academic information  
-  - Skills, qualifications, or professional competencies
-  - Contact information and personal details
-  
-  If this is NOT a resume (e.g., invoice, receipt, contract, article, manual, etc.), respond with:
-  {
-    "error": "This document does not appear to be a resume. Please upload a proper resume containing professional experience, education, and skills sections."
-  }
-  
-  If this IS a resume, analyze it thoroughly and provide comprehensive feedback in this JSON format:
-  {
-    "overallScore": "X/10",
-    "strengths": [
-      "strength 1", 
-      "strength 2", 
-      "strength 3"
-    ],
-    "improvements": [
-      "improvement 1", 
-      "improvement 2", 
-      "improvement 3"
-    ],
-    "keywords": [
-      "keyword 1", 
-      "keyword 2", 
-      "keyword 3"
-    ],
-    "summary": "Brief overall assessment",
-    "performanceMetrics": {
-      "formatting": X,
-      "contentQuality": X,
-      "keywordUsage": X,
-      "atsCompatibility": X,
-      "quantifiableAchievements": X
-    },
-    "actionItems": [
-      "specific actionable item 1",
-      "specific actionable item 2", 
-      "specific actionable item 3"
-    ],
-    "proTips": [
-      "professional tip 1",
-      "professional tip 2",
-      "professional tip 3"
-    ],
-    "atsChecklist": [
-      "ats requirement 1",
-      "ats requirement 2", 
-      "ats requirement 3"
-    ]
-  }
-  
-  For performanceMetrics, rate each area 1-10 based on:
-  
-  - formatting: Layout, structure, visual appeal, consistency, readability. Look for clean sections, proper spacing, consistent fonts, professional appearance
-  - contentQuality: Relevance, achievements, impact, clarity, completeness. Assess if content is relevant to target roles, achievements are well-described, and information is complete
-  - keywordUsage: Industry terms, ATS optimization, skill keywords, job relevance. Check for industry-specific terminology, technical skills, software names, methodologies, and relevant keywords
-  - atsCompatibility: ATS-friendly formatting, scannable structure, proper headings. Evaluate if resume uses standard section headers (Experience, Education, Skills), avoids graphics/images, has clean formatting, and is easily parseable by ATS systems
-  - quantifiableAchievements: Use of numbers, percentages, metrics in accomplishments. Look for specific numbers, percentages, dollar amounts, timeframes, team sizes, project scopes, and measurable results
-  
-  For atsCompatibility specifically, be very strict and look for:
-  - Standard section headings (Experience, Education, Skills, Summary, etc.)
-  - Clean, simple formatting without graphics, images, or complex layouts
-  - Proper use of keywords relevant to the industry/role
-  - Quantified achievements with specific numbers and metrics
-  - Action verbs at the beginning of bullet points
-  - Consistent formatting throughout the document
-  - Contact information clearly visible
-  - No tables, charts, or complex formatting that might confuse ATS systems
-  
-  For atsChecklist, provide specific requirements and improvements to ensure the resume passes ATS systems successfully.
-  
-  For actionItems, provide specific, actionable steps the user can take immediately to improve their resume.
-  
-  For proTips, give professional advice that would help them in their job search and resume optimization.
-  
-  Document text:
-  {{DOCUMENT_TEXT}}`,
+    ANALYZE_RESUME_PROMPT: `You are an expert resume and job description analyst.
+First, verify that the document provided is actually a resume:
+- Look for professional experience, work history, or employment information
+- Check for education background, degrees, or academic information  
+- Verify skills, qualifications, or professional competencies
+- Confirm contact information and personal details
+
+If this is NOT a resume, respond with:
+{
+  "error": "This document does not appear to be a resume. Please upload a proper resume containing professional experience, education, and skills sections."
+}
+
+If this IS a resume, analyze it thoroughly against the provided job description/requirements and provide comprehensive feedback in this JSON format:
+{
+  "overallScore": "X/10",
+  "strengths": [
+    "strength 1", 
+    "strength 2", 
+    "strength 3"
+  ],
+  "improvements": [
+    "improvement 1", 
+    "improvement 2", 
+    "improvement 3"
+  ],
+  "keywords": [
+    "keyword 1", 
+    "keyword 2", 
+    "keyword 3"
+  ],
+  "summary": "Brief overall assessment comparing resume to job requirements",
+  "performanceMetrics": {
+    "formatting": X,
+    "contentQuality": X,
+    "keywordUsage": X,
+    "atsCompatibility": X,
+    "quantifiableAchievements": X
+  },
+  "actionItems": [
+    "specific actionable item 1",
+    "specific actionable item 2", 
+    "specific actionable item 3"
+  ],
+  "proTips": [
+    "professional tip 1",
+    "professional tip 2",
+    "professional tip 3"
+  ]
+}
+
+IMPORTANT - RATING GUIDELINES:
+
+Rate performanceMetrics 1-10 based on how well the resume matches the job requirements:
+
+- formatting (1-10): Layout clarity, structure, visual appeal, consistency. Is the resume well-organized and easy to read? Does it have clear sections? Professional appearance?
+
+- contentQuality (1-10): How well does resume experience align with job requirements? Do achievements and responsibilities match what the job asks for? Is content relevant and complete?
+
+- keywordUsage (1-10): Extract ALL technical skills and keywords from the job description, then check if they appear in the resume. Look for:
+  * Programming languages mentioned (React, Vue.js, JavaScript, TypeScript, etc.)
+  * Frameworks and tools (Jest, React Testing Library, Cypress, Playwright, Git, etc.)
+  * Methodologies (Agile, Scrum, WCAG accessibility, responsive design, etc.)
+  * Give higher score if more keywords are present, lower if many are missing
+
+- atsCompatibility (1-10): Is resume optimized for ATS parsing? Check for:
+  * Standard section headers (Experience, Education, Skills, Summary)
+  * Clean formatting without graphics/tables
+  * Presence of job keywords naturally integrated
+  * Action verbs at start of bullet points
+  * Contact info clearly visible
+  * Avoid complex layouts that confuse ATS
+
+- quantifiableAchievements (1-10): Does resume include metrics and numbers? Look for:
+  * Percentages, dollar amounts, team sizes
+  * Performance improvements shown with numbers
+  * Project scopes with measurable results
+  * "Increased by X%", "Led team of X", "Reduced time by X%" etc.
+  * Higher score if multiple quantified achievements, lower if none or very few
+
+For summary, explicitly mention:
+- Overall fit for this job (good/moderate/poor match)
+- Key strengths relative to job requirements
+- Critical missing skills from job description
+- Whether resume highlights required experience
+
+For actionItems, provide specific changes to improve resume for THIS job:
+- "Add X skill to skills section (mentioned in job posting)"
+- "Highlight X project that uses Y technology from job requirements"
+- "Reword experience to emphasize X responsibility mentioned in job"
+- "Add quantified metrics to show impact in Y area"
+- "Incorporate X framework/tool mentioned in job posting"
+
+For proTips, give targeted advice:
+- How to better position experience for this role
+- Industry-specific terminology to incorporate
+- How to structure resume for this type of position
+- What hiring managers look for in this role
+
+RESUME TEXT:
+{{DOCUMENT_TEXT}}
+
+JOB DESCRIPTION/REQUIREMENTS:
+{{JOB_DESCRIPTION}}`,
 };
 
 export const METRIC_CONFIG = [
