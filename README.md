@@ -42,10 +42,8 @@ After seeing resumes (including mine) rejected before a human ever reads them, I
 
 ---
 
-## 🚀 Live Demo
-
-Check out the live version of the application:  
-👉 https://ankurkohli007.github.io/resumeai-platform/
+## 🚀 Live Demo of ResumeAI: Next-Gen Career Intelligence Platform 
+Check out the live version of ResumeAI Platform: [Click here for resume analysis](https://ankurkohli007.github.io/resumeai-platform/)
 
 ---
 
