@@ -105,3 +105,44 @@ git clone https://github.com/ankurkohli007/resumeai-platform.git
 cd resumeai-platform
 ```
 
+**2. Install dependencies**
+```
+npm install
+```
+
+**3. Run the application**
+```
+npm run dev
+```
+
+**Note:** Open the local URL shown in the terminal (usually http://localhost:5173).
+
+### 🌐 Deployment
+
+The project is configured for deployment using **GitHub Pages**.
+
+```
+npm run build
+```
+
+The production build is generated inside the ```dist/``` folder and deployed via the ```gh-pages``` branch.
+
+### 🎯 Design Philosophy
+
+- Focus on explainability, not black-box scoring
+- Prefer cost-efficient AI integration over heavy infrastructure
+- Build tools usable by individuals and small teams, not only enterprises
+- Treat resume rejection as a problem statement, not just an outcome
+
+### 🛣 Roadmap
+
+- DOCX resume support
+- Role based skill weighting
+- Downloadable analysis reports
+- Resume version comparison
+- Multi job profile analysis
+
+### 👤 Author
+Ankur Kohli
+Software Engineer | AI-Integrated Systems
+
