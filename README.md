@@ -45,6 +45,7 @@ Check out the live version of this weather app: [Click here for resume analysis]
 ---
 
 ## 🛠 Tech Stack
+---
 
 ### Frontend
 - **React.js (Vite)** – UI development and state management  
