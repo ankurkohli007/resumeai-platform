@@ -162,6 +162,6 @@ The production build is generated inside the ```dist/``` folder and deployed via
 ---
 
 ### 👤 Author
-Ankur Kohli
+Ankur Kohli <br>
 Software Engineer | AI-Integrated Systems
 
