@@ -100,7 +100,7 @@ function App() {
               <h1 className="text-8xl md:text-[120px] font-bold tracking-tighter text-white text-glow-white leading-none">
                 Resume<span className="text-white/20">AI</span>
               </h1>
-              <p className="text-lg md:text-xl text-slate-400 font-normal max-w-lg mx-auto leading-relaxed">Precision-engineered scoring for the <span className="text-white">next generation</span> of talent.</p>
+              <p className="text-lg md:text-xl text-slate-400 font-normal max-w-lg mx-auto leading-relaxed">Precision engineered scoring for the <span className="text-white">next generation</span> of talent.</p>
             </header>
 
             <div className="space-y-8">
