@@ -34,10 +34,16 @@ Everyone talks about ATS optimization, but very few talk about how **expensive, 
 - Semantic resume ↔ job description matching
 - ATS-focused feedback and keyword coverage
 - Skill gap identification
-- GenAI-driven improvement suggestions
-- Cost-efficient architecture (no heavy NLP pipelines)
+- GenAI driven improvement suggestions
+- Cost efficient architecture (no heavy NLP pipelines)
 - Clean, responsive UI built for clarity
 
+---
+
+---
+
+## 🚀 Live Demo of SkyScope WeatherApp
+Check out the live version of this weather app: [Click here for resume analysis](https://ankurkohli007.github.io/resumeai-platform/)
 ---
 
 ## 🛠 Tech Stack
