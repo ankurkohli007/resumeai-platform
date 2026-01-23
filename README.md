@@ -40,8 +40,6 @@ Everyone talks about ATS optimization, but very few talk about how **expensive, 
 
 ---
 
----
-
 ## 🚀 Live Demo of SkyScope WeatherApp
 Check out the live version of this weather app: [Click here for resume analysis](https://ankurkohli007.github.io/resumeai-platform/)
 ---
