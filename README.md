@@ -77,10 +77,11 @@ GenAI generates insights & suggestions
             |
             v
 ATS-style scores and feedback shown in UI
+```
 
+### 📁 Project Structure
 
-### Project Structure
-
+```text
 resumeai-platform/
 │
 ├── public/
@@ -94,4 +95,13 @@ resumeai-platform/
 ├── vite.config.js
 ├── package.json
 └── README.md
+```
+
+### ▶️ Getting Started
+
+**1. Clone the repository**
+```
+git clone https://github.com/ankurkohli007/resumeai-platform.git
+cd resumeai-platform
+```
 
