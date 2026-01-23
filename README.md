@@ -77,3 +77,21 @@ GenAI generates insights & suggestions
             |
             v
 ATS-style scores and feedback shown in UI
+
+
+### Project Structure
+
+resumeai-platform/
+│
+├── public/
+├── src/
+│   ├── components/
+│   ├── constants/
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── index.html
+├── vite.config.js
+├── package.json
+└── README.md
+
