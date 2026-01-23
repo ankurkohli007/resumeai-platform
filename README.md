@@ -21,7 +21,9 @@
 
 ## 🚀 Overview
 
-Everyone talks about ATS optimization, but very few talk about how **expensive, opaque, and inaccessible** most ATS tools actually are.
+Everyone talks about ATS optimization, but very few talk about how **expensive, opaque, and inaccessible** it really is.
+
+After seeing resumes (including mine) rejected before a human ever reads them, I decided to build something practical.
 
 **ResumiAI** was built as a practical alternative — combining a modern frontend stack with GenAI-powered analysis to help candidates and small teams understand how resumes are evaluated *before* they are filtered out.
 
@@ -34,18 +36,20 @@ Everyone talks about ATS optimization, but very few talk about how **expensive, 
 - Semantic resume ↔ job description matching
 - ATS-focused feedback and keyword coverage
 - Skill gap identification
-- GenAI driven improvement suggestions
-- Cost efficient architecture (no heavy NLP pipelines)
+- GenAI-driven improvement suggestions
+- Cost-efficient architecture (no heavy NLP pipelines)
 - Clean, responsive UI built for clarity
 
 ---
 
-## 🚀 Live Demo of SkyScope WeatherApp
-Check out the live version of this weather app: [Click here for resume analysis](https://ankurkohli007.github.io/resumeai-platform/)
+## 🚀 Live Demo
+
+Check out the live version of the application:  
+👉 https://ankurkohli007.github.io/resumeai-platform/
+
 ---
 
 ## 🛠 Tech Stack
----
 
 ### Frontend
 - **React.js (Vite)** – UI development and state management  
@@ -84,6 +88,8 @@ GenAI generates insights & suggestions
 ATS-style scores and feedback shown in UI
 ```
 
+---
+
 ### 📁 Project Structure
 
 ```text
@@ -101,6 +107,8 @@ resumeai-platform/
 ├── package.json
 └── README.md
 ```
+
+---
 
 ### ▶️ Getting Started
 
@@ -122,6 +130,8 @@ npm run dev
 
 **Note:** Open the local URL shown in the terminal (usually http://localhost:5173).
 
+---
+
 ### 🌐 Deployment
 
 The project is configured for deployment using **GitHub Pages**.
@@ -132,12 +142,16 @@ npm run build
 
 The production build is generated inside the ```dist/``` folder and deployed via the ```gh-pages``` branch.
 
+---
+
 ### 🎯 Design Philosophy
 
 - Focus on explainability, not black-box scoring
 - Prefer cost-efficient AI integration over heavy infrastructure
 - Build tools usable by individuals and small teams, not only enterprises
 - Treat resume rejection as a problem statement, not just an outcome
+
+---
 
 ### 🛣 Roadmap
 
@@ -146,6 +160,8 @@ The production build is generated inside the ```dist/``` folder and deployed via
 - Downloadable analysis reports
 - Resume version comparison
 - Multi job profile analysis
+
+---
 
 ### 👤 Author
 Ankur Kohli
