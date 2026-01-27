@@ -2,7 +2,33 @@
   "hash": "d5eb8cac",
   "configHash": "1838bd1d",
   "lockfileHash": "bf29c8df",
-  "browserHash": "e0df18ff",
-  "optimized": {},
-  "chunks": {}
+  "browserHash": "11b114b4",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "f279d2fd",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "ed7d2f16",
+      "needsInterop": true
+    },
+    "pdfjs-dist": {
+      "src": "../../node_modules/pdfjs-dist/build/pdf.mjs",
+      "file": "pdfjs-dist.js",
+      "fileHash": "ad5c3321",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-7GZU3KRO": {
+      "file": "chunk-7GZU3KRO.js"
+    },
+    "chunk-X34TS6PR": {
+      "file": "chunk-X34TS6PR.js"
+    }
+  }
 }

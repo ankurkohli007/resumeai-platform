@@ -202,9 +202,230 @@ function App() {
             <p className="text-[9px] text-slate-600 uppercase tracking-widest animate-pulse">Analyzing Resume Against Job Requirements</p>
           </div>
         </div>
-      ) : (
-        /* --- DASHBOARD --- */
-        <div id="printable-report" className="min-h-screen p-6 md:p-12 lg:p-20 max-w-[1500px] mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+      ) : (() => {
+        const score = parseInt(analysis.overallScore) || 0;
+        
+        // Score-based messaging and styling
+        const getScoreConfig = (s) => {
+          if (s === 0) return {
+            title: "No Alignment Detected",
+            subtitle: "This position is not a match",
+            description: "Your resume shows no alignment with this job description. The role requires skills and experience that are not present in your current resume.",
+            icon: "🚫",
+            color: "red",
+            gradFrom: "from-red-600",
+            gradTo: "to-red-700",
+            borderColor: "border-red-500/30",
+            accentColor: "text-red-400",
+            bgColor: "bg-red-500/10",
+            needsAction: true,
+            message: "Complete career pivot needed"
+          };
+          if (s <= 2) return {
+            title: "Minimal Alignment",
+            subtitle: "Significant gaps exist",
+            description: "Your resume has very little alignment with this job description. Major revisions and skill development would be needed to be competitive.",
+            icon: "⛔",
+            color: "orange",
+            gradFrom: "from-orange-600",
+            gradTo: "to-orange-700",
+            borderColor: "border-orange-500/30",
+            accentColor: "text-orange-400",
+            bgColor: "bg-orange-500/10",
+            needsAction: true,
+            message: "Substantial resume overhaul required"
+          };
+          if (s <= 4) return {
+            title: "Partial Alignment",
+            subtitle: "Major gaps to address",
+            description: "Your resume shows some basic alignment, but there are major gaps between your qualifications and job requirements. Significant improvements needed.",
+            icon: "⚠️",
+            color: "amber",
+            gradFrom: "from-amber-600",
+            gradTo: "to-amber-700",
+            borderColor: "border-amber-500/30",
+            accentColor: "text-amber-400",
+            bgColor: "bg-amber-500/10",
+            needsAction: true,
+            message: "Focused improvements needed"
+          };
+          if (s <= 6) return {
+            title: "Moderate Alignment",
+            subtitle: "Some gaps to close",
+            description: "Your resume has moderate alignment with this role. While you have some relevant experience, there are noticeable gaps in key areas.",
+            icon: "📋",
+            color: "yellow",
+            gradFrom: "from-yellow-600",
+            gradTo: "to-yellow-700",
+            borderColor: "border-yellow-500/30",
+            accentColor: "text-yellow-400",
+            bgColor: "bg-yellow-500/10",
+            needsAction: false,
+            message: "Some targeted refinements"
+          };
+          if (s <= 7) return {
+            title: "Good Alignment",
+            subtitle: "Strong candidate profile",
+            description: "Your resume shows good alignment with this job description. You have most of the required qualifications and would be a competitive candidate.",
+            icon: "✅",
+            color: "green",
+            gradFrom: "from-green-600",
+            gradTo: "to-green-700",
+            borderColor: "border-green-500/30",
+            accentColor: "text-green-400",
+            bgColor: "bg-green-500/10",
+            needsAction: false,
+            message: "Minor polish recommended"
+          };
+          return {
+            title: "Excellent Alignment",
+            subtitle: "Ideal candidate match",
+            description: "Your resume shows exceptional alignment with this job description. You're well-qualified and should strongly consider applying.",
+            icon: "🚀",
+            color: "emerald",
+            gradFrom: "from-emerald-600",
+            gradTo: "to-emerald-700",
+            borderColor: "border-emerald-500/30",
+            accentColor: "text-emerald-400",
+            bgColor: "bg-emerald-500/10",
+            needsAction: false,
+            message: "Ready to apply!"
+          };
+        };
+
+        const config = getScoreConfig(score);
+        const showGapScreen = score <= 6;
+
+        return showGapScreen ? (
+          /* --- GAP ANALYSIS SCREEN --- */
+          <div className="min-h-screen flex flex-col items-center justify-center p-8">
+            <div className="max-w-5xl w-full">
+              {/* Main Impact Section */}
+              <div className="text-center mb-16 animate-in fade-in duration-1000">
+                <div className="mb-6 inline-block text-8xl">{config.icon}</div>
+                <h1 className={`text-5xl md:text-7xl font-bold text-white mb-4 leading-tight`}>
+                  {config.title} <span className={`bg-gradient-to-r ${config.gradFrom} ${config.gradTo} bg-clip-text text-transparent`}>{config.subtitle}</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-slate-300 mb-6 max-w-2xl mx-auto">
+                  Match Score: <span className={`font-bold ${config.accentColor}`}>{score}/10</span>
+                </p>
+                <div className="h-2 w-48 bg-gradient-to-r from-slate-700 to-slate-600 rounded-full mx-auto mb-8">
+                  <div className={`h-full bg-gradient-to-r ${config.gradFrom} ${config.gradTo} rounded-full`} style={{width: `${score * 10}%`}}></div>
+                </div>
+                <p className="text-slate-400 text-lg max-w-xl mx-auto">{config.description}</p>
+                <div className={`mt-6 inline-block px-6 py-2 ${config.bgColor} border ${config.borderColor} rounded-full`}>
+                  <p className={`${config.accentColor} font-semibold`}>{config.message}</p>
+                </div>
+              </div>
+
+              {/* Missing Skills & Requirements */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                {/* Missing Skills */}
+                <div className={`glass-panel rounded-[2rem] p-8 border ${config.borderColor} hover:border-opacity-60 transition-all`}>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-3xl">🎯</span>
+                    <h2 className={`text-2xl font-bold ${config.accentColor}`}>Critical Gaps</h2>
+                  </div>
+                  <ul className="space-y-4">
+                    {analysis.improvements?.slice(0, 5).map((imp, i) => (
+                      <li key={i} className="flex gap-3 text-sm text-slate-200">
+                        <span className={`${config.accentColor} font-bold text-xl leading-none`}>✗</span>
+                        <span className="leading-relaxed">{imp}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* What to Add */}
+                <div className={`glass-panel rounded-[2rem] p-8 border ${config.borderColor} hover:border-opacity-60 transition-all`}>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-3xl">📋</span>
+                    <h2 className={`text-2xl font-bold ${config.accentColor}`}>Action Items</h2>
+                  </div>
+                  <ul className="space-y-4">
+                    {analysis.actionItems?.slice(0, 5).map((item, i) => (
+                      <li key={i} className="flex gap-3 text-sm text-slate-200">
+                        <span className={`${config.accentColor} font-bold text-xl leading-none`}>+</span>
+                        <span className="leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Strengths to Leverage */}
+              {analysis.strengths && analysis.strengths.length > 0 && (
+                <div className={`glass-panel rounded-[2rem] p-8 ${config.bgColor} border ${config.borderColor} mb-12`}>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-3xl">✨</span>
+                    <h2 className={`text-2xl font-bold ${config.accentColor}`}>Your Existing Strengths</h2>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {analysis.strengths?.map((strength, i) => (
+                      <div key={i} className={`${config.bgColor} border ${config.borderColor} rounded-xl p-4 hover:border-opacity-60 transition-all`}>
+                        <p className="text-slate-200 text-sm font-medium">{strength}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Pro Tips */}
+              <div className={`glass-panel rounded-[2rem] p-10 border ${config.borderColor} mb-12 bg-gradient-to-br ${config.bgColor}`}>
+                <div className="flex items-center gap-3 mb-8">
+                  <span className="text-3xl">💡</span>
+                  <h2 className={`text-2xl font-bold ${config.accentColor}`}>Professional Tips</h2>
+                </div>
+                <div className="space-y-4">
+                  {analysis.proTips?.map((tip, i) => (
+                    <div key={i} className="flex gap-4 items-start">
+                      <div className={`w-8 h-8 rounded-full ${config.bgColor} border ${config.borderColor} flex items-center justify-center flex-shrink-0 mt-1`}>
+                        <span className={`${config.accentColor} font-bold text-sm`}>→</span>
+                      </div>
+                      <p className="text-slate-200 text-sm leading-relaxed">{tip}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Navigation Buttons */}
+              <div className="flex flex-col md:flex-row gap-4 justify-center">
+                <button
+                  onClick={() => { setStage("jobDescription"); setJobDescription(""); setUploadedFile(null); setAnalysis(null); }}
+                  className={`px-10 py-4 rounded-full bg-gradient-to-r ${config.gradFrom} ${config.gradTo} text-white font-bold hover:opacity-90 transition-all shadow-lg`}
+                >
+                  Try Different Job Description
+                </button>
+                <button
+                  onClick={() => window.print()}
+                  className="px-10 py-4 rounded-full border border-white/20 text-white font-bold hover:bg-white/10 transition-all"
+                >
+                  Download Full Report
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          /* --- DASHBOARD --- */
+          <div id="printable-report" className="min-h-screen p-6 md:p-12 lg:p-20 max-w-[1500px] mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+            
+            {/* Good Match Success Banner */}
+            {score >= 7 && (
+              <div className="mb-8 animate-in fade-in slide-in-from-top duration-500">
+                <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-blue-500/10 border border-emerald-400/30 p-8 backdrop-blur-xl">
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-transparent opacity-50"></div>
+                  <div className="relative flex items-start gap-4">
+                    <div className="text-4xl mt-1">✨</div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-emerald-300 mb-2">Excellent Resume-Job Match!</h3>
+                      <p className="text-emerald-200/90 leading-relaxed text-lg">
+                        Your resume demonstrates a strong <span className="font-bold text-emerald-300">{score}/10 match</span> with this job description. You're well-positioned for this role and should consider applying!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
           <header className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-16 no-print">
             <div className="space-y-2">
@@ -361,9 +582,10 @@ function App() {
                 ))}
               </ul>
             </section>
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
