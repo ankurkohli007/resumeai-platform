@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=210&text=ResumiAI&fontAlign=50&fontAlignY=35&desc=Next-Gen%20Career%20Intelligence%20Platform&descAlign=50&descAlignY=58" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=210&text=ResumeAI&fontAlign=50&fontAlignY=35&desc=Next-Gen%20Career%20Intelligence%20Platform&descAlign=50&descAlignY=58" />
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=16&pause=1200&center=true&vCenter=true&width=720&lines=AI-assisted+Resume+Analyzer;Semantic+Resume+%E2%86%94+Job+Description+Matching;ATS-focused+feedback+%7C+Skill+gap+analysis+%7C+GenAI+insights;Built+with+React+%2B+Tailwind+%2B+Puter.js" />
 
