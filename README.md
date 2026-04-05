@@ -13,7 +13,7 @@
 
 <br/><br/>
 
-<b>ResumiAI</b> is a cost-efficient, AI-assisted resume analysis platform designed to generate ATS-style insights without relying on expensive NLP pipelines or enterprise-only infrastructure.
+<b>ResumeAI</b> is a cost-efficient, AI-assisted resume analysis platform designed to generate ATS-style insights without relying on expensive NLP pipelines or enterprise-only infrastructure.
 
 </div>
 
